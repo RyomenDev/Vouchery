@@ -12,6 +12,8 @@ const requiredEnvVars = [
   "PORT",
   "SERVER_URL",
   "GEMINI_API_KEY",
+  "JWT_SECRET",
+  "ADMIN_EMAILS",
 ];
 
 // Check for missing environment variables
@@ -27,7 +29,10 @@ const conf = {
   FRONTEND_URL: process.env.FRONTEND_URL,
   SERVER_URL: process.env.SERVER_URL,
   GEMINI_API_KEY: process.env.GEMINI_API_KEY,
-  PORT: parseInt(process.env.PORT, 10) || 5000, // Ensuring PORT is a number
+  PORT: parseInt(process.env.PORT, 10) || 5000,
+  JWT_SECRET: String(process.env.JWT_SECRET),
+  CORS_ORIGIN1: String(process.env.CORS_ORIGIN1),
+  ADMIN_EMAILS: String(process.env.ADMIN_EMAILS),
 };
 
 export default conf;

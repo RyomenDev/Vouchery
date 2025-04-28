@@ -8,7 +8,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="z-50 flex items-center justify-between px-6 py-4 shadow-lg bg-gradient-to-b from-[#4E342E] via-[#3B2F2F] to-[#212121] text-white">
+    <header className="z-100 flex items-center justify-between px-6 py-4 shadow-lg bg-gradient-to-b from-[#4E342E] via-[#3B2F2F] to-[#212121] text-white">
       {/* Logo and App Name */}
       <div className="flex items-center gap-3 cursor-pointer transition-transform duration-300 hover:scale-105">
         <img src={Logo} alt={AppName} className="h-12 md:h-14 w-auto" />
@@ -35,7 +35,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="absolute top-20 left-0 right-0 bg-emerald-100 rounded-b-xl shadow-md px-6 py-4 font-[Poppins] text-gray-800 space-y-4 md:hidden">
+        <div className="z-100 absolute top-20 left-0 right-0 bg-emerald-100 rounded-b-xl shadow-md px-6 py-4 font-[Poppins] text-gray-800 space-y-4 md:hidden">
           {HeaderOptions.map((option) => (
             <NavItem
               key={option.key}

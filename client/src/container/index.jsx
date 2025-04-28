@@ -3,7 +3,7 @@ import RegisterPage from "./RegisterPage.jsx";
 
 import CouponsPage from "./CouponsPage.jsx";
 import AdminPage from "./AdminPage.jsx";
-import CouponsCapture from "./CouponsPage.jsx";
+import CouponsCapture from "./CouponCapture.jsx";
 import ScrapperPage from "./ScrapperPage.jsx";
 
 export {

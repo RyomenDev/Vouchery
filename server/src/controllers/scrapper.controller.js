@@ -1,5 +1,5 @@
 import { Product } from "../models/product.model.js";
-// import scraper from "../utils/Scrapper.js";
+import scraper from "../utils/Scrapper.js";
 // import scraper from "../utils/ScrapperLocal.js";
 import { generateReviewSummaryOpenAi } from "../utils/openaiUtil.js";
 import { generateReviewSummaryGemini } from "../utils/geminiUtil.js";

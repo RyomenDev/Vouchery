@@ -1,19 +1,22 @@
-# ScrapeSmart
 
-ScrapeSmart is a **MERN-based Amazon Smart TV scraper** that extracts product details, pricing, offers, and AI-generated review summaries. Built with **Node.js, Puppeteer, Express, React.js, and MongoDB**, it provides an interactive UI for seamless product data retrieval and storage.
-
-![Description](./Scrape/Wroking.gif)
+<!-- ![Description](./Scrape/Wroking.gif)
 
 <p align="center" style="display: flex; justify-content: center;">
     <img src="https://github.com/user-attachments/assets/e2168b85-915b-41b1-9411-e1485d46fafd" style="width: 45%; height: auto; margin-right: 10px;">
     <img src="https://github.com/user-attachments/assets/a9c6d359-88e2-435e-b7e6-aa5317a3a2b1" style="width: 45%; height: auto;">
 </p>
 
-![Image](https://github.com/user-attachments/assets/bfbfff03-4354-4011-876a-3d3f51077b12)
+![Image](https://github.com/user-attachments/assets/bfbfff03-4354-4011-876a-3d3f51077b12) -->
+
+# Vouchery
+
+Vouchery is a **MERN-based** Amazon Smart TV scraper that extracts product details, pricing, offers, and AI-generated review summaries. Built with **Node.js, Puppeteer, Express, React.js, and MongoDB**, it also features **Socket.IO**-based real-time coupon distribution using a round-robin algorithm. The project provides an interactive UI for seamless product data retrieval, display, and storage.
+
 
 ### 1. Backend (Node.js + Express.js)
 
-- Use **Puppeteer** (for JavaScript-rendered pages) to scrape Amazon product details.
+- Use **Puppeteer** (with Stealth Plugin) for scraping Amazon product details, even from JavaScript-rendered pages.
+- Socket.IO implementation for real-time coupon code distribution among connected clients using a round-robin mechanism.
 - Store the extracted data in **MongoDB**.
 - Implement an API endpoint (`/scrape`) to trigger the scraper.
 
@@ -22,6 +25,7 @@ ScrapeSmart is a **MERN-based Amazon Smart TV scraper** that extracts product de
 - Create a UI to input the Amazon product link.
 - Display scraped product details (name, price, images, offers, etc.).
 - Show an AI-generated summary of customer reviews using **Gemini API**, instead of OpenAI, as **OpenAI does not offer a free tier**.
+- Display distributed coupon codes received in real-time via WebSockets.
 
 ### 3. Database (MongoDB)
 
@@ -29,7 +33,7 @@ Store scraped product data for future reference.
 
 Tech Stack:
 
-- **Backend:** Node.js, Express.js, Puppeteer
+- **Backend:** Node.js, Express.js, Puppeteer, Socket.IO
 - **Frontend:** React.js, Tailwind CSS
 - **Database:** MongoDB (to store scraped data)
 - **AI Summary:** Gemini API for review summarization
@@ -43,6 +47,7 @@ Tech Stack:
 ✅ AI-generated customer review summary (**Gemini API**)  
 ✅ Interactive UI for entering and displaying scraped product details  
 ✅ Stores scraped data in MongoDB for easy retrieval
+✅ Real-time coupon code distribution via Socket.IO using a round-robin algorithm
 
 ### 🔍 How It Works
 

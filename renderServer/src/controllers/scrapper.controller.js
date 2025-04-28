@@ -1,6 +1,7 @@
 import { Product } from "../models/product.model.js";
-import scraper from "../utils/Scrapper.js";
-// import { generateReviewSummaryOpenAi } from "../utils/openaiUtil.js";
+// import scraper from "../utils/Scrapper.js";
+// import scraper from "../utils/ScrapperLocal.js";
+import { generateReviewSummaryOpenAi } from "../utils/openaiUtil.js";
 import { generateReviewSummaryGemini } from "../utils/geminiUtil.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";

@@ -7,19 +7,15 @@ puppeteer.use(StealthPlugin());
 async function scrapeProduct(url) {
   console.log({ url });
 
+  // Launch Puppeteer with necessary configurations
   const browser = await puppeteer.launch({
-    executablePath:
-      // puppeteer.executablePath(),
-      process.env.PUPPETEER_EXECUTABLE_PATH || "/usr/bin/chromium",
     headless: "new", // Run in headless mode for production
     slowMo: 50, // Mimic human behavior
     args: [
       "--no-sandbox",
       "--disable-setuid-sandbox",
       "--disable-blink-features=AutomationControlled",
-      "--disable-gpu",
       "--disable-infobars",
-      "--disable-dev-shm-usage",
     ],
   });
 
@@ -39,7 +35,7 @@ async function scrapeProduct(url) {
 
     // Go to the product page
     await page.goto(url, { waitUntil: "domcontentloaded", timeout: 0 });
-    // console.log("✅ Page Loaded");
+    console.log("✅ Page Loaded");
 
     // Wait for product title to load
     await page.waitForSelector("#productTitle", { timeout: 10000 });
@@ -47,7 +43,7 @@ async function scrapeProduct(url) {
     // Scroll down a bit to mimic user behavior
     await page.evaluate(() => window.scrollBy(0, 300));
 
-    // console.log("🔍 Scraping Data...");
+    console.log("🔍 Scraping Data...");
 
     // Extract product details
     const data = await page.evaluate(() => {
@@ -73,18 +69,15 @@ async function scrapeProduct(url) {
 
       return {
         name: getText("#productTitle"),
-        rating: getText(".a-icon-alt") || "No Rating",
-        numRatings: getText("#acrCustomerReviewText") || "0",
-        price: getText(".a-price-whole") || "Not Available",
+        price: getText(".a-price-whole") + getText(".a-price-fraction"),
+        rating: getText(".a-icon-alt"),
+        numRatings: getText("#acrCustomerReviewText"),
         discount: getText(".savingsPercentage") || "No Discount",
         bankOffers: getText("#promotions_feature_div") || "No Offers",
         about: getText("#feature-bullets") || "No Description",
         productInfo: getText("#productDetails_techSpec_section_1") || "No Info",
         images: getImages("#imgTagWrapperId img"),
-        // manufacturerImages: getImages("#aplus img"),
         reviews: getReviews(),
-        // landingImage: getImages("#landingImage"),
-        // wrapperImages: getImages(".imgTagWrapper img"),
       };
     });
 
@@ -92,7 +85,9 @@ async function scrapeProduct(url) {
     return data;
   } catch (error) {
     console.error("❌ Scraping Error:", error);
-    return { error: "Scraping failed" };
+    return {
+      error: "Failed to scrape data. Amazon might have blocked access.",
+    };
   } finally {
     await browser.close();
     console.log("🚀 Browser Closed");
@@ -100,26 +95,32 @@ async function scrapeProduct(url) {
   }
 }
 
-export default scrapeProduct;
-
-// Example usage
+// // Example usage
 // const url =
 //   "https://www.amazon.in/Daikin-Inverter-Display-Technology-MTKL50U/dp/B0BK1KS6ZD";
 // scrapeProduct(url).then((data) => console.log("📦 Final Data:", data));
+
+export default scrapeProduct;
 
 // Example usage
 // scrapeProduct(
 //   "https://www.amazon.in/Daikin-Inverter-Display-Technology-MTKL50U/dp/B0BK1KS6ZD"
 // ).then(console.log);
 
-// Launch Puppeteer with necessary configurations
-//   const browser = await puppeteer.launch({
-//     headless: "new", // Run in headless mode for production
-//     slowMo: 50, // Mimic human behavior
-//     args: [
-//       "--no-sandbox",
-//       "--disable-setuid-sandbox",
-//       "--disable-blink-features=AutomationControlled",
-//       "--disable-infobars",
-//     ],
-//   });
+// const getImages = (selector) =>
+//   [...document.querySelectorAll(selector)].map((img) => img.src);
+
+// return {
+//   name: getText("#productTitle"),
+//   rating: getText(".a-icon-alt") || "No Rating",
+//   numRatings: getText("#acrCustomerReviewText") || "0",
+//   price: getText(".a-price-whole") || "Not Available",
+//   discount: getText(".savingsPercentage") || "No Discount",
+//   bankOffers: getText("#promotions_feature_div") || "No Offers",
+//   about: getText("#feature-bullets") || "No Description",
+//   productInfo: getText("#productDetails_techSpec_section_1") || "No Info",
+//   images: getImages("#imgTagWrapperId img"),
+//   manufacturerImages: getImages("#aplus img"),
+//   reviewSummary:
+//     getText("#cr-summarization-attributes-list") || "No Reviews",
+// };

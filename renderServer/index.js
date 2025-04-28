@@ -7,10 +7,12 @@ import path from "path";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import connectDB from "./src/config/db.js";
-import { app } from "./src/app.js";
+import { app, server } from "./src/app.js";
 
 import conf from "./conf.js";
 const PORT = conf.PORT || 5000;
+
+console.log(`⚙️ Allowed Client : ${conf.FRONTEND_URL}`);
 
 // Swagger configuration
 const swaggerOptions = {
@@ -23,7 +25,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: `${conf.SERVER_URL}`,
+        url: `http://localhost:${PORT}`,
         description: "Development Server",
       },
     ],
@@ -41,9 +43,8 @@ const startServer = async () => {
     // app.listen(PORT, () => {
     //   console.log(`⚙️ Server is running at port: ${PORT}`);
     // });
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
       console.log(`⚙️ Server is running at port: ${PORT}`);
-      console.log(`⚙️ Allowed Client : ${conf.FRONTEND_URL}`);
     });
   } catch (error) {
     console.error("❌ Failed to start server:", error.message);

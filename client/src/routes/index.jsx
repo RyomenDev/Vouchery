@@ -24,8 +24,9 @@ const router = createBrowserRouter(
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />
         <Route path="admin" element={<AdminPage />} />
-        <Route path="coupons" element={<CouponsPage />} />
-        <Route path="coupon-capture" element={<CouponsCapture />} />
+        {/* <Route path="coupons" element={<CouponsPage />} /> */}
+        {/* <Route path="coupon-capture" element={<CouponsCapture />} /> */}
+        <Route path="coupons" element={<CouponsCapture />} />
       </Route>
     </Route>
   )

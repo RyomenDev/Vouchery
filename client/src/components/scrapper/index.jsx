@@ -74,7 +74,7 @@ export default function ScrapperHomePage() {
         {savedProducts.length === 0 && (
           <>
             <motion.h1 className="text-4xl md:text-6xl font-bold">
-              ScrapeSmart
+              Vouchery
             </motion.h1>
             <motion.p className="text-lg md:text-2xl mt-4 max-w-xl">
               {questions[currentQuestion]}
